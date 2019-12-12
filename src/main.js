@@ -27,6 +27,7 @@ function debounce(fn, delay = 300) {
         }, delay);
     }
 }
+/*eslint-disable no-unused-vars*/
 Vue.directive('debounce', (el, binding) => {
   if (binding.value !== binding.oldValue) {
     el.oninput = debounce(ev => {
@@ -34,7 +35,7 @@ Vue.directive('debounce', (el, binding) => {
     }, parseInt(binding.value) || 300);
   }
 })
-
+/*eslint-enable no-unused-vars*/
 
 new Vue({
   render: h => h(App),

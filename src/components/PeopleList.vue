@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="row cards-list mb-3 justify-content-center" style="min-height: 514px; min-width: 290px">
-    <div class="card col-md-3 m-1" v-for="person in portion">
+    <div class="card col-md-3 m-1" v-for="person in portion" v-bind:key="person.id">
       <div class="card-body">
         <h5 class="card-title">{{ person.name }}</h5>
         <h6 class="card-subtitle mb-2">Species: {{ person.species }}</h6>
@@ -11,15 +11,15 @@
     </div>
   </div>
   <nav aria-label="Page navigation" class="d-flex justify-content-center mb-4">
-    <div class="btn-group" role="group" aria-label="pagination">
-      <button type="button" class="btn btn-secondary" v-bind:disabled="pageNumber <= 1" v-on:click="previousPage">
-        Previous
-      </button>
-      <button v-for="page in pageCount" v-on:click="changePage(page)" v-bind:disabled="pageNumber === page" type="button" class="btn btn-secondary">{{ page }}</button>
-      <button type="button" class="btn btn-secondary" v-bind:disabled="pageNumber >= pageCount" v-on:click="nextPage">
-        Next
-      </button>
+    <button style="max-width: 86px; max-height: 38px;" type="button" class="btn btn-secondary" v-bind:disabled="pageNumber <= 1" v-on:click="previousPage">
+      Previous
+    </button>
+    <div class="btn-group flex-wrap justify-content-center" role="group" aria-label="pagination">
+      <button style="max-width: 44px; max-height: 38px;" v-for="page in pageCount" v-bind:key="page.id" v-on:click="changePage(page)" v-bind:disabled="pageNumber === page" type="button" class="btn btn-secondary">{{ page }}</button>
     </div>
+    <button style="max-width: 60px; max-height: 38px;" type="button" class="btn btn-secondary" v-bind:disabled="pageNumber >= pageCount" v-on:click="nextPage">
+      Next
+    </button>
   </nav>
 </div>
 </template>
@@ -54,14 +54,16 @@ export default {
     },
     changePage(number) {
       this.pageNumber = number
+    },
+    getFirstPage() {
+      if (this.pageCount < this.pageNumber) {
+        this.pageNumber = 1
+      }
     }
   },
   computed: {
     pageCount() {
       var pages = Math.ceil(this.filteredData.length / this.cardsOnPage)
-      if (pages < this.pageNumber) {
-        this.pageNumber = 1
-      }
       return pages
     },
     filteredData() {
@@ -73,6 +75,7 @@ export default {
       })
     },
     portion() {
+      this.getFirstPage()
       var start = (this.cardsOnPage * this.pageNumber) - this.cardsOnPage
       var end = start + this.cardsOnPage
       return this.filteredData.slice(start, end)

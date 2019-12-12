@@ -5,7 +5,7 @@
   </header>
   <main>
     <section class="cards-section container pt-4">
-      <input v-if="!errored" v-model.lazy="filter" v-debounce="500" class="main-search form-control mb-3" placeholder="Search characters">
+      <input v-if="!errored" v-model.lazy="filter" v-debounce="500"  class="main-search form-control mb-3" placeholder="Search characters">
       <div v-if="errored" class="alert alert-danger" role="alert">
         We're sorry, we're not able to retrieve this information at the moment, please try back later
       </div>
@@ -40,7 +40,6 @@ export default {
           .then(response => {
             i.species = response.data.name
           })
-          .catch(error => console.log(error))
       } else {
         i.species = 'unknown'
       }
@@ -66,10 +65,10 @@ export default {
           this.getSpecies(item)
         })
       }))
-      .catch(error => {
-        console.log(error)
-        this.errored = true
+      /*eslint-disable no-unused-vars*/
+      .catch(error => {this.errored = true
       })
+      /*eslint-enable no-unused-vars*/
       .finally(() => {
         this.loading = false
       })
