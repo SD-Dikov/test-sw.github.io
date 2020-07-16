@@ -9,7 +9,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item href="#">Home</b-nav-item>
-        <b-nav-item class="active" href="#">characters<span class="sr-only">(current)</span></b-nav-item>
+        <b-nav-item class="active" href="#">Characters<span class="sr-only">(current)</span></b-nav-item>
         <b-nav-item href="#">Starships</b-nav-item>
         <b-nav-item href="#">Vehicles</b-nav-item>
         <b-nav-item href="#">Species</b-nav-item>

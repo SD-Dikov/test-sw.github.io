@@ -5,6 +5,7 @@
   </header>
   <main>
     <section class="cards-section container pt-4">
+      <pyatnashki></pyatnashki>
       <input v-if="!errored" v-model.lazy="filter" v-on:change="getFirstPage" v-debounce="500" class="main-search form-control mb-3" placeholder="Search characters">
       <div v-if="errored" class="alert alert-danger" role="alert">
         We're sorry, we're not able to retrieve this information at the moment, please try back later
@@ -54,7 +55,7 @@ export default {
     },
     getSearch() {
       axios
-        .get('https://swapi.co/api/people/?search=' + this.filter + '&page=' + this.pageNumber)
+        .get('https://swapi.dev/api/people/?search=' + this.filter + '&page=' + this.pageNumber)
         .then(response => {
           this.charactersQuantity = response.data.count
           this.characters = response.data.results
@@ -73,7 +74,7 @@ export default {
     },
     getRequest(){
       axios
-        .get('https://swapi.co/api/people/?page=' + this.pageNumber)
+        .get('https://swapi.dev/api/people/?page=' + this.pageNumber)
         .then(response => {
           this.charactersQuantity = response.data.count
           this.characters = response.data.results
@@ -138,6 +139,7 @@ body {
   background-color: #000000;
   background: url('./assets/zvezdnoe_nebo_zvezdy_chernyj_blesk_118255_2560x1440.jpg') repeat;
   background-attachment: fixed;
+  box-sizing: border-box;
 }
 
 .btn-search-open {

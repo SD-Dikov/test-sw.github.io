@@ -39,6 +39,7 @@ _axios.interceptors.response.use(
   }
 );
 
+/*eslint-disable no-unused-vars*/
 Plugin.install = function(Vue, options) {
   Vue.axios = _axios;
   window.axios = _axios;
@@ -55,6 +56,7 @@ Plugin.install = function(Vue, options) {
     },
   });
 };
+/*eslint-enable no-unused-vars*/
 
 Vue.use(Plugin)
 
